@@ -1,23 +1,16 @@
-input.onButtonPressed(Button.A, function on_button_pressed_a() {
-    led.plotBarGraph(input.acceleration(Dimension.X), 255)
-    basic.pause(2000)
-    basic.clearScreen()
-})
-input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
+input.onButtonPressed(Button.A, function () {
     music.play(music.createSoundExpression(WaveShape.Square, 1, 4380, 255, 0, 1000, SoundExpressionEffect.None, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
-input.onButtonPressed(Button.B, function on_button_pressed_b() {
-    led.plotBarGraph(input.lightLevel(), 100)
-    basic.pause(2000)
-    basic.clearScreen()
+input.onButtonPressed(Button.B, function () {
+    music.play(music.createSoundExpression(WaveShape.Sawtooth, 5000, 1, 255, 0, 1000, SoundExpressionEffect.Warble, InterpolationCurve.Linear), music.PlaybackMode.UntilDone)
 })
 let item = 0
 let ring = neopixel.create(DigitalPin.P0, 12, NeoPixelMode.RGB)
 ring.clear()
-ring.setPixelColor(6, neopixel.colors(NeoPixelColors.Blue))
+ring.showRainbow(1, 360)
+ring.setBrightness(50)
 ring.show()
-basic.forever(function on_forever() {
-    
+basic.forever(function () {
     item = input.acceleration(Dimension.X) / 250
     ring.rotate(item)
     ring.show()
